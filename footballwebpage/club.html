@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+ .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+ width: 40%;
+ padding: 2px 16px;
+
+}
+body{
+  background-image: url('https://wallpapercave.com/wp/7t30wgN.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+
+h4{
+ color: #ffcccc;
+ font-family: verdana;
+ font-size: 400%;
+   font-weight: bold;
+ text-shadow: 0 0 13px #FF0000, 0 0 15px #0000FF;
+}
+h5{
+  color: #ffcccc;
+  font-family: verdana;
+  font-size: 200%;
+    font-weight: bold;
+  text-shadow: 0 0 13px #FF0000, 0 0 15px #0000FF;
+ }
+
+}
+</style>
+<body >
+  <h4><center>Teams....</center></h4>
+    <input type="text" placeholder="enter team id">
+    <button onclick="data()">
+      Submit
+    </button>
+    <center>    <div id="res">
+
+            </div>
+            <div id="play"></div>
+          </center>
+<script>
+let q;
+function data(){
+  q = document.querySelector('input[type=text]').value;
+  console.log(q);
+
+        var url = `https://allsportsapi.com/api/football/?&met=Teams&teamId=`+q+`&APIkey=61eec7b44be01f29ccfb39d3c7d701c83a811a25dd4f2467a2f8629a22236ba7`;
+
+        $.ajax(url).done(function (response) {
+        console.log(response);
+
+        for(let i =0 ; i < response.result.length;i++){
+            $("#res").append(
+                `
+                []<div class="card"><h4>
+
+                <b>TEAM NAME :</b>  ${response.result[i].team_name}<br>
+                <br>
+              <b>  TEAM LOGO :</b>  <img src="${response.result[i].team_logo}"><br>
+               <br>
+                <br>
+                </h4></div>
+       `
+
+              )  }
+
+            let comp =   response.result[0].players.map(ja=>{
+                return(
+                  `
+                  <h5>${ja.player_name}</h5>
+                  `
+                )
+              })
+
+              document.getElementById('play').innerHTML = comp;
+    }
+
+);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+.card {
+ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ transition: 0.3s;
+width: 40%;
+padding: 2px 16px;
+
+}
+body{
+ background-image: url('https://wallpapercave.com/wp/7t30wgN.jpg');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: 100% 100%;
+}
+
+
+h4{
+color: #ffcccc;
+font-family: verdana;
+font-size: 400%;
+  font-weight: bold;
+text-shadow: 0 0 13px #FF0000, 0 0 15px #0000FF;
+}
+h5{
+ color: #ffcccc;
+ font-family: verdana;
+ font-size: 200%;
+   font-weight: bold;
+ text-shadow: 0 0 13px #FF0000, 0 0 15px #0000FF;
+}
+}
+</style>
+<body style=" background: linear-gradient(to right,  #66ffcc  0%,  #ff99cc 100%);">
+    <center><h3>Live Ongoing Matches....</h3></center>
+    <center>    <div id="result">
+            </div></center>
+<script>
+var q = $("#query").val();
+        var url = `https://allsportsapi.com/api/football/?met=Leagues&APIkey=61eec7b44be01f29ccfb39d3c7d701c83a811a25dd4f2467a2f8629a22236ba7`;
+        var result;
+        $.ajax(url).done(function (response) {
+        console.log(response);
+
+        for(let i =0 ; i < response.result.length;i++){
+            $("#result").append(
+                `
+                <div class="card">
+
+                <b>LEAGUE NAME :</b>  ${response.result[i].league_name}<br>
+                <br>
+              <b>  COUNTRY NAME :</b>  ${response.result[i].country_name}<br>
+               <br>
+
+                <br>
+                </div>
+       `
+
+              )  }
+    }
+
+);
+</script>
+</body>
+</html>
